@@ -34,7 +34,7 @@ public class Tester {
 		int noOfRuns = 50;
 					
 		int stParticlov = 60;
-		int stIteracij = 60;
+		int stIteracij = 50;
 		double zelo_blizu = 0.00001;
 		double fHitrost;
 		double fPersonal;
