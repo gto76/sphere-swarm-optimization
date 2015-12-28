@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -e
+
+mainClass='sso.tests.Tester' 
+appName='sphere-swarm-optimizer'
+scriptName=`basename $0`
+
+echo "$scriptName: COMPILING..."
+mkdir -p target/main
+javac -d target/main `find src -name *.java`
+cd target
+
+echo "$scriptName: PACKAGING IN JAR..."
+jar cvfe "$appName.jar" "$mainClass" -C main . &> /dev/null
+
+echo "$scriptName: EXECUTING JAR..."
+java -jar "$appName.jar"
