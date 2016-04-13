@@ -1,7 +1,7 @@
 Sphere Swarm Optimization
 ========================
 
-#### Particle swarm optimization variant in which particles move inside n-sphere instead of euclidean space
+#### Particle swarm optimization variant in which particles move on the surface of an n-sphere instead of euclidean space
 
 ![screenshot](doc/results.png)
 
