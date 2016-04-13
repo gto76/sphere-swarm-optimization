@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
+import java.text.*;
 
 import _._;
 
@@ -25,8 +26,9 @@ import sso.pso.random.MersenneTwister;
 
 public class Tester {
 
-	static int tabNum = 14;
-
+	static int tabNum = 11;
+	static NumberFormat decFormatter = new DecimalFormat("#0.00"); 
+    static NumberFormat decFormatter2 = new DecimalFormat("0.00E0"); 
 	
 	public static void main(String[] args) {
 		Globals.random = new MersenneTwister();
@@ -84,38 +86,38 @@ public class Tester {
 		//##
 		ArrayList<Function> fff = new ArrayList<Function>();
 		
-		fff.add(new RosenbrockShifted());
-		fff.add(new RastriginShifted());
-		fff.add(new GriewankShifted());
-		fff.add(new AckleyShifted());
+		//fff.add(new RosenbrockShifted());
+		//fff.add(new RastriginShifted());
+		//fff.add(new GriewankShifted());
+		//fff.add(new AckleyShifted());
 
 		fff.add(new Schwefel());
 		fff.add(new Rastrigin());
 		fff.add(new Ackley());
 		fff.add(new Griewank());
 		fff.add(new FB1());
-		fff.add(new FB2());
-		fff.add(new FB3());
+		//fff.add(new FB2());
+		//fff.add(new FB3());
 		fff.add(new Explin());
-		fff.add(new Qudlin());
-		fff.add(new Sineali());
+		//fff.add(new Qudlin());
+		//fff.add(new Sineali());
 		
-		fff.add(new Branins());
-		fff.add(new DropWave());
-		fff.add(new Easom());
+		//fff.add(new Branins());
+		//fff.add(new DropWave());
+		//fff.add(new Easom());
 		fff.add(new FiftDeJung());
 		fff.add(new Goldstein());
-		fff.add(new Langerman());
-		fff.add(new Michelawitz());
+		//fff.add(new Langerman());
+		//fff.add(new Michelawitz());
 		fff.add(new Rosenbrock());
-		fff.add(new Schubert());
+		//fff.add(new Schubert());
 		fff.add(new SixHumpCamelBack());
 		List<Problem> problems = createTheProblems(fff);
 			
 		//##
 		//## Test
 		//##
-		_.p("\t\t||		SSO			|		PSO			|	MOL		\n");
+		_.p("\t\t||\tSSO\t\t|\tPSO\t\t|\tMOL\t\t|\n");
 		_.pRepeatTab("=", tabNum);
 		_.p("\n");
 		
@@ -157,7 +159,8 @@ public class Tester {
 				Double de = del.getValue();
 				double rScore = de / avgDelta;
 				relativeScore.put(optim, rScore);
-				_.p("\t"+rScore+"\t\t|");
+				String rScoreFormated = decFormatter.format(rScore);
+				_.p("\t"+rScoreFormated+"\t\t|");
 			}
 			_.pn(); _.pRepeatTab("-", tabNum); _.pn();
 			fak.put(prob, relativeScore);
@@ -198,8 +201,10 @@ public class Tester {
 		for (Optimizer op : sum.keySet()) {
 			double avg = sum.get(op) / fak.size();
 			sum.put(op, avg);
-			_.p("\t"); _.pTab(""+avg, 3); _.p("\t|");
+			String avgFormated = decFormatter.format(avg);
+			_.p("\t"+avgFormated+"\t\t|");
 		}
+		_.p("\n");
 		
 	}
 	
@@ -216,7 +221,8 @@ public class Tester {
 		Function fun = prob.enacba;
 		double mean = testOptimizer(prob, param, opt, noOfRuns);
 		double delta = mean - fun.getBestPossibleResult();
-		_.p("\t"); _.pTab(""+delta, 3); _.p("\t|");
+		String deltaFormated = decFormatter2.format(delta);
+		_.p("\t"); _.pTab(""+deltaFormated, 1); _.p("\t|");
 		return delta;
 	}
 	

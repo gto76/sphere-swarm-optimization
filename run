@@ -3,6 +3,7 @@
 set -e
 
 mainClass='sso.tests.Tester' 
+#mainClass='sso.tests.ParameterOptimizer' 
 appName='sphere-swarm-optimizer'
 scriptName=`basename $0`
 
